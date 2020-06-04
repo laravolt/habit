@@ -1,5 +1,5 @@
-# habit
-The Laravolt Habit untuk panduan sehari-hari kodinganmu
+# The Laravolt Habit
+Panduan koding sehari-hari agar selamat sampai tujuan.
 
 ## Berdamai Dengan NULL
 https://github.com/laravolt/habit/blob/master/null.md
