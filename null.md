@@ -17,7 +17,7 @@ $user->posts->count(); // kode ini tidak akan dieksekusi jika $user null
 ```
 
 ## withDefault()
-Relasi di Laravel memungkinkan kita untuk mendefinisikan default nilai jika hasil yang diberikan adalah `null`
+Relasi di Laravel memungkinkan kita untuk mendefinisikan default nilai jika hasil yang diberikan adalah `null`.
 
 ❌
 ```php
@@ -47,8 +47,26 @@ echo $post->user->birthDate->format('d-m-Y');
 // 09-03-1995
 ```
 
-## Null Coalesce
-TODO
+## Null Coalesce (??)
+Null Coalesce menggunakan operator `??` digunakan untuk mereturn value sebelah kiri jika bernilai `null` atau variabel belum dideklarasikan. 
+
+
+❌
+```php
+$harga = $hargaTotal - 20;
+echo $harga;
+
+// Undefined variable: hargaTotal on line number 1
+// Akan terjadi error karena variabel $hargaTotal belum didefinisikan.
+```
+
+✅
+```php
+$harga = ($hargaTotal ?? 50) - 20;
+echo $harga;
+ 
+// 30
+```
 
 ## optional()
 TODO
