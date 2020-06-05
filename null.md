@@ -17,7 +17,35 @@ $user->posts->count(); // kode ini tidak akan dieksekusi jika $user null
 ```
 
 ## withDefault()
-TODO
+Relasi di Laravel memungkinkan kita untuk mendefinisikan default nilai jika hasil yang diberikan adalah `null`
+
+❌
+```php
+public function user() {
+    return $this->belongsTo('App\User');
+}
+
+// Dijalankan ketika birthDate bernilai null 
+$post = Post::findOrFail($id);
+echo $post->user->birthDate->format('d-m-Y'); 
+
+// Akan terjadi error karena null tidak bisa diformat tanggal
+```
+
+✅
+```php
+public function user() {
+    return $this->belongsTo('App\User')->withDefault(function ($user, $post) {
+         $user->birthDate = '1995-03-09';
+    });
+}
+
+// Dijalankan ketika birthDate bernilai null 
+$post = Post::findOrFail($id);
+echo $post->user->birthDate->format('d-m-Y');
+
+// 09-03-1995
+```
 
 ## Null Coalesce
 TODO
