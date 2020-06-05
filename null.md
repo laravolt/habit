@@ -107,4 +107,51 @@ foreach($posts as $post) {
 ```
 
 ## Array Access
-TODO
+Jika kita ingin menambahkan fitur-fitur `array` ke `object` di php, kita dapat menggunakan interface `ArrayAccess`.
+
+❌
+```php
+$post = new Post;
+$post['date'] = '2020-06-05';
+echo $post['date'];
+
+// Fatal error: Cannot use object of type stdClass as array …
+```
+
+✅
+```php
+<?php
+
+class Post implements ArrayAccess
+{
+    protected $_data=array();
+    public function offsetExists ($offset)
+    {
+        return array_key_exists($offset, $this->_data);
+    }
+
+    public function offsetGet ($offset)
+    {
+        return $this->_data[$offset];
+    }
+
+    public function offsetSet ($offset, $value)
+    {
+        $this->_data[$offset] = $value;
+    }
+
+    public function offsetUnset ($offset)
+    {
+        unset($this->_data[$offset]);
+    }
+
+}
+
+$post = new Post;
+$post['date'] = '2020-06-05';
+
+echo "Tanggal artikel dibuat adalah : " . $post['date'];
+
+// Tanggal artikel dibuat adalah : 2020-06-05
+// Object post dapat menggunakan sintaks array
+```
