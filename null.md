@@ -48,8 +48,7 @@ echo $post->user->birthDate->format('d-m-Y');
 ```
 
 ## Null Coalesce (??)
-Null Coalesce menggunakan operator `??` digunakan untuk mereturn value sebelah kiri jika bernilai `null` atau variabel belum dideklarasikan. 
-
+Null Coalesce menggunakan operator `??` digunakan untuk mereturn value sebelah kanan jika bernilai `null` atau variabel belum didefinisikan. 
 
 ❌
 ```php
@@ -69,7 +68,24 @@ echo $harga;
 ```
 
 ## optional()
-TODO
+`optional()` merupakan salah satu helper di Laravel yang berguna untuk mereturn object menjadi `null` jika properti dan method bernilai `null` sehingga tidak menimbulkan error.
+
+❌
+```php
+$user = auth()->user;
+echo $user->username;
+
+// Jika user belum login, maka akan menimbulkan error pada aplikasi.
+```
+
+✅
+```php
+$user = auth()->user;
+echo optional($user)->username;
+
+// null
+// Jika user belum login, maka username akan mengembalikan `null`
+```
 
 ## Query Filter
 Ketika melakukan query, pastikan hanya mengambil data yang valid.
